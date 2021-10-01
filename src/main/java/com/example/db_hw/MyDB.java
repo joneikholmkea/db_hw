@@ -14,7 +14,7 @@ public class MyDB {
     //String url = "jdbc:mysql://172.31.49.98:3306";  // private EC2 ip address
 //    String url = "jdbc:mysql://1.2.3.4:3306/?useSSL=false";
     String schemaName = "mydb2";
-    String tableName = "persons";
+    String tableName = "persons"; // comment
     List<String > persons = new ArrayList();
 
     public MyDB(){
