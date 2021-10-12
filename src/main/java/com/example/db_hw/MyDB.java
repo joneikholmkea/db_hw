@@ -13,7 +13,7 @@ public class MyDB {
     String url = "jdbc:mysql://"+ DbHwApplication.ip +":3306";  // private EC2 ip address
     //String url = "jdbc:mysql://172.31.49.98:3306";  // private EC2 ip address
 //    String url = "jdbc:mysql://1.2.3.4:3306/?useSSL=false";
-    String schemaName = "mydb2";
+    String schemaName = "mydb";
     String tableName = "persons"; // comment
     List<String > persons = new ArrayList();
 
@@ -57,7 +57,7 @@ public class MyDB {
         // 2. make sure there exists a table, named persons. If not, create one:
         //    Primary key: idpersons INT AUTO_INCREMENT
         //    Column: name VARCHAR(45)
-        sql = "CREATE TABLE IF NOT EXISTS `mydb2`.`persons` (\n" +
+        sql = "CREATE TABLE IF NOT EXISTS `" + schemaName + "`.`persons` (\n" +
                 "  `idpersons` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `name` VARCHAR(45) NULL,\n" +
                 "  PRIMARY KEY (`idpersons`));";
