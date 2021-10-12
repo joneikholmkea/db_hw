@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,5 +22,13 @@ public class HomeController {
         }
         model.addAttribute("persons", persons);
         return "index";
+    }
+
+    @PostMapping("addUser")
+    public String addUser(){
+        System.out.println("add user...");
+        myDB.addUser();
+        myDB.getAllUsers();
+        return "redirect:/";
     }
 }

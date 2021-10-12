@@ -16,6 +16,7 @@ public class MyDB {
     String schemaName = "mydb";
     String tableName = "persons"; // comment
     List<String > persons = new ArrayList();
+    private Connection conn;
 
     public MyDB(){
         connectAndQuery();
@@ -27,23 +28,44 @@ public class MyDB {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try(Connection conn = DriverManager.getConnection(url, username,password)){
+        try{
+            conn = DriverManager.getConnection(url, username,password);
             if(!conn.isClosed()){
                 System.out.println("DB Conn ok ");
                 initializeDatabase(conn);
-//                // Get the rows:
-                String sql = "SELECT * FROM " + tableName;
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet resultSet = ps.executeQuery();
-                persons.clear();
-                while (resultSet.next()){
-                    String firstName = resultSet.getString("name");
-                    System.out.println("Name: " + firstName);
-                    persons.add(firstName);
-                }
+                getAllUsers();
             }
         }catch (Exception e){
             System.out.println("Error " + e.getMessage());
+        }
+    }
+
+    public void getAllUsers() {
+        //                // Get the rows:
+        String sql = "SELECT * FROM " + tableName;
+        ResultSet resultSet = null;
+        persons.clear();
+        try {
+            Statement statement = conn.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                String firstName = resultSet.getString("name");
+                System.out.println("Name: " + firstName);
+                persons.add(firstName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addUser(){
+        String sql = "INSERT IGNORE INTO " + tableName + " VALUES (null, 'User')";
+        try {
+            Statement statement = conn.createStatement();
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

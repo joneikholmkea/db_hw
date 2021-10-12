@@ -9,5 +9,8 @@
 <form th:each="person : ${persons}">
     <input type="text" name="name" th:value="${person}">
 </form>
+<form action="addUser" method="post">
+    <input type="submit" value="Add User">
+</form>
 </body>
 </html>
