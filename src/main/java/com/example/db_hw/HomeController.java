@@ -16,7 +16,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-
+        myDB.getAllUsers();
         if(persons.isEmpty()){
             persons = myDB.getPersons();
         }
@@ -28,7 +28,6 @@ public class HomeController {
     public String addUser(){
         System.out.println("add user...");
         myDB.addUser();
-        myDB.getAllUsers();
         return "redirect:/";
     }
 }
