@@ -69,8 +69,8 @@ public class MyDB {
 
     }
 
-    public void addUser(){
-        String sql = "INSERT IGNORE INTO " + tableName + " VALUES (null, 'User')";
+    public void addUser(String name){
+        String sql = "INSERT IGNORE INTO " + tableName + " VALUES (null,'"+name+"')";
         try {
             conn = getConnection();
             Statement statement = conn.createStatement();

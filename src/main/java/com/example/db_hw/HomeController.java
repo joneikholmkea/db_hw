@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ public class HomeController {
     }
 
     @PostMapping("addUser")
-    public String addUser(){
-        System.out.println("add user...");
-        myDB.addUser();
+    public String addUser(@RequestParam String name){
+        System.out.println("add user... " + name);
+        myDB.addUser(name);
         return "redirect:/";
     }
 }
